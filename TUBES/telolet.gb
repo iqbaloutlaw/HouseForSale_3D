@@ -1,0 +1,354 @@
+dim kamerax#, kameray#, kameraz#, rotasi# 'kamera dan rotasi
+dim kecepatan#= 2
+dim tex1 = loadmipmaptexture("data/10.jpg")    'bahan rumah
+dim tex2= loadmipmaptexture("data/pavement.jpg")   'bahan rumah
+dim tex3= loadmipmaptexture("data/floor01.jpg")   'bahan rumah
+dim tex4= loadmipmaptexture("data/Wall01.jpg")   'bahan rumah
+dim tex5= loadmipmaptexture("data/00005.jpg") ' rumput
+dim tex6= loadmipmaptexture("data/GLASS.png")  'bahan rumah
+dim tex7= loadmipmaptexture("data/Crate.bmp")     'bahan rumah
+dim tex8= loadmipmaptexture("data/Bumps.bmp")  'bahan rumah
+dim tex9= loadmipmaptexture("data/Cube.bmp")      'bahan rumah
+dim tex10= loadmipmaptexture("data/Tim.bmp")     'pemandangan
+dim tex11= loadmipmaptexture("data/road01.jpg")  ' jalan     
+dim tex12= loadmipmaptexture("data/Wall02.jpg")  'kayu
+dim tex13= loadmipmaptexture("data/FORSALE.png")   'tulisan forsale
+
+
+glenable(gl_texture_2d)
+
+while true  
+glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
+glLoadIdentity()
+gltranslatef(0.0,0.0,-50.0)  
+glRotatef(kameray#,0.0,1.0,0.0)
+glRotatef(kamerax#,1.0,0.0,0.0)
+
+glbindtexture(gl_texture_2d, tex1)
+glBegin(GL_QUADS) 'tembok belakang  
+glTexCoord2f(0.0, 0.0)
+glvertex3f(10.0 , 2.0 , -5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-10.0 , 2.0 , -5.0)   
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-10.0 , -5.0 , -5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(10.0 , -5.0 , -5.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex1)
+glBegin(GL_QUADS) 'tembok depan  
+glTexCoord2f(0.0, 0.0)
+glvertex3f(2.0 , 2.0 , 5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-10.0 , 2.0 , 5.0)   
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-10.0 , -5.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(2.0 , -5.0 , 5.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex7)
+glBegin(GL_QUADS) 'pintu depan  
+glTexCoord2f(0.0, 0.0)
+glvertex3f(1.0 , -1.0 , 5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-1.0 , -1.0 , 5.0)   
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-1.0 , -5.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(1.0 , -5.0 , 5.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex6)
+glBegin(GL_QUADS) 'jendela depan  
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-5.0 , -1.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-8.0 , -1.0 , 5.0)   
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-8.0 , -4.0 , 5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-5.0 , -4.0 , 5.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex1)
+glBegin(GL_QUADS) 'tembok kiri
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , 8.0 , -5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-10.0 , 8.0 , 5.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-10.0 , -5.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , -5.0 , -5.0)
+glEnd()                 
+
+glbindtexture(gl_texture_2d, tex9)
+glBegin(GL_QUADS) 'cerobong asap besi samping kiri
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-12.0 , -2.0 , 0.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-12.0 , -2.0 , -4.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-12.0 , -5.0 , -4.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-12.0 , -5.0 , 0.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex9)
+glBegin(GL_QUADS) 'cerobong asap besi belakang
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , -2.0 , -4.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-12.0 , -2.0 , -4.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-12.0 , -5.0 , -4.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-10.0 , -5.0 , -4.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex9)
+glBegin(GL_QUADS) 'cerobong asap besi depan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , -2.0 , 0.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-12.0 , -2.0 , 0.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-12.0 , -5.0 , 0.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-10.0 , -5.0 , 0.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex9)
+glBegin(GL_QUADS) 'cerobong asap besi atas
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , -2.0 , 0.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , -2.0 , -4.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-12.0 , -2.0 , -4.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-12.0 , -2.0 , 0.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex8)
+glBegin(GL_QUADS) 'cerobong asap  samping kiri
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-11.0 , 10.0 , -2.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-11.0 , 10.0 , -1.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-11.0 , -5.0 , -1.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-11.0 , -5.0 , -2.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex8)
+glBegin(GL_QUADS) 'cerobong asap  samping kanan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , 10.0 , -2.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , 10.0 , -1.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-10.0 , -5.0 , -1.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-10.0 , -5.0 , -2.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex8)
+glBegin(GL_QUADS) 'cerobong asap  belakang
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-11.0 , 10.0 , -2.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , 10.0 , -2.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-10.0 , -5.0 , -2.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-11.0 , -5.0 , -2.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex8)
+glBegin(GL_QUADS) 'cerobong asap  depan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-11.0 , 10.0 , -1.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , 10.0 , -1.0)  
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-10.0 , -5.0 , -1.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(-11.0 , -5.0 , -1.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex1)
+glBegin(GL_QUADS) 'tembok kanan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(10.0 , 8.0 , -5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(10.0 , 8.0 , 5.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(10.0 , -5.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(10.0 , -5.0 , -5.0)
+glEnd()                      
+
+glbindtexture(gl_texture_2d, tex1)
+glBegin(GL_QUADS) 'tembok dalam kanan (garasi)
+glTexCoord2f(0.0, 0.0)
+glvertex3f(2.0 , 2.0 , -5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(2.0 , 2.0 , 5.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(2.0 , -5.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(2.0 , -5.0 , -5.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex5)
+glBegin(GL_QUADS) 'ruang terbuka hijau
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-35.0 , -5.0 , -25.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(35.0 , -5.0 , -25.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(35.0 , -5.0 , 25.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-35.0 , -5.0 , 25.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex2)
+glBegin(GL_QUADS) 'plester bawah
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , -5.0 , -10.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(10.0 , -5.0 , -10.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(10.0 , -5.0 , 10.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , -5.0 , 10.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex3)
+glBegin(GL_QUADS) 'lantai garasi
+glTexCoord2f(0.0, 0.0)
+glvertex3f(2.0 , -5.0 , -5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(10.0 , -5.0 , -5.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(10.0 , -5.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(2.0 , -5.0 , 5.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex3)
+glBegin(GL_QUADS) 'lantai dalam rumah
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , -5.0 , -5.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(2.0 , -5.0 , -5.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(2.0 , -5.0 , 5.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , -5.0 , 5.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex4)
+glBegin(GL_QUADS) 'genteng depan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , 8.0 , 0.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(10.0 , 8.0 , 0.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(10.0 , 1.0 , 8.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , 1.0 , 8.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex4)
+glBegin(GL_QUADS) 'genteng depan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-10.0 , 8.0 , 0.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(10.0 , 8.0 , 0.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(10.0 , 1.0 , -8.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-10.0 , 1.0 , -8.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex11)
+glBegin(GL_QUADS) 'jalan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-35.0 , -5.0 , 25.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(35.0 , -5.0 , 25.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(35.0 , -5.0 , 35.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-35.0 , -5.0 , 35.0)
+glEnd()
+
+
+glbindtexture(gl_texture_2d, tex11)
+glBegin(GL_QUADS) 'jalan
+glTexCoord2f(0.0, 0.0)
+glvertex3f(-35.0 , -5.0 , 35.0)
+glTexCoord2f(0.0, 1.0)
+glvertex3f(35.0 , -5.0 , 35.0) 
+glTexCoord2f(1.0, 1.0)
+glvertex3f(35.0 , -5.0 , 45.0)
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-35.0 , -5.0 , 45.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex12)
+glBegin(GL_QUADS) 'kayu
+glTexCoord2f(0.0, 1.0)
+glvertex3f(5.0 , -2.0 , 20.0)
+glTexCoord2f(1.0, 1.0)
+glvertex3f(6.0 , -2.0 , 20.0) 
+glTexCoord2f(1.0, 0.0)
+glvertex3f(6.0 , -5.0 , 20.0)
+glTexCoord2f(0.0, 0.0)
+glvertex3f(5.0 , -5.0 , 20.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex13)
+glBegin(GL_QUADS) 'forsale
+glTexCoord2f(0.0, 1.0)
+glvertex3f(3.0 , -1.0 , 20.0)
+glTexCoord2f(1.0, 1.0)
+glvertex3f(8.0 , -1.0 , 20.0) 
+glTexCoord2f(1.0, 0.0)
+glvertex3f(8.0 , -4.0 , 20.0)
+glTexCoord2f(0.0, 0.0)
+glvertex3f(3.0 , -4.0 , 20.0)
+glEnd()
+
+glbindtexture(gl_texture_2d, tex10)
+glBegin(GL_QUADS) 'pemandangan  
+glTexCoord2f(0.0, 1.0)
+glvertex3f(100.0 , 100.0 , -50.0)
+glTexCoord2f(1.0, 1.0)
+glvertex3f(-100.0 , 100.0 , -50.0)   
+glTexCoord2f(1.0, 0.0)
+glvertex3f(-100.0 , -5.0 , -50.0)
+glTexCoord2f(0.0, 0.0)
+glvertex3f(100.0 , -5.0 , -50.0)
+glEnd()
+
+swapBuffers()
+
+if scankeydown(VK_RIGHT) Then
+    kameray# = kameray#+kecepatan# 
+elseif scankeydown(VK_LEFT) Then 
+    kameray# = kameray#-kecepatan#   
+elseif scankeydown(VK_UP) Then 
+    kamerax# = kamerax#-kecepatan#
+elseif scankeydown(VK_DOWN) Then 
+    kamerax# = kamerax# +kecepatan#
+endif 
+
+wend
+
+
